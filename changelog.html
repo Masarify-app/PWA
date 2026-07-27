@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's New — Masarify</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="theme-color" content="#006B5E">
+    <style>
+        :root {
+            --teal: #006B5E;
+            --teal-soft: #E6F2F0;
+            --ink: #1A1C1E;
+            --ink-dim: #44474A;
+            --surface: #FFFBFE;
+            --surface-sunken: #F4F0F4;
+            --card: #FFFFFF;
+            --divider: #E0E0E0;
+            --income: #1A6B3C;
+            --income-soft: #D6F0E0;
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --teal: #4FD8C4;
+                --teal-soft: #003730;
+                --ink: #E2E2E5;
+                --ink-dim: #C5C6CA;
+                --surface: #1A1C1E;
+                --surface-sunken: #111315;
+                --card: #2A2C2E;
+                --divider: #3A3C3E;
+                --income: #6FD49A;
+                --income-soft: #0A3020;
+            }
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--surface-sunken);
+            color: var(--ink);
+            min-height: 100vh;
+            padding: 24px 16px 48px;
+        }
+        .container { max-width: 680px; margin: 0 auto; }
+        header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+        header a {
+            font-size: 14px;
+            color: var(--teal);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        header a:hover { text-decoration: underline; }
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--teal);
+            font-style: italic;
+            letter-spacing: -0.5px;
+        }
+        .release {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 16px;
+            border: 1px solid var(--divider);
+        }
+        .release-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .version {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ink);
+        }
+        .date {
+            font-size: 13px;
+            color: var(--ink-dim);
+        }
+        .badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 99px;
+            background: var(--income-soft);
+            color: var(--income);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .section { margin-bottom: 16px; }
+        .section:last-child { margin-bottom: 0; }
+        .section-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--teal);
+            margin-bottom: 8px;
+        }
+        ul { list-style: none; padding: 0; }
+        li {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--ink-dim);
+            padding: 4px 0 4px 20px;
+            position: relative;
+        }
+        li::before {
+            content: "•";
+            position: absolute;
+            left: 6px;
+            color: var(--teal);
+            font-size: 16px;
+            line-height: 1.4;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 13px;
+            color: var(--ink-dim);
+        }
+        footer a { color: var(--teal); text-decoration: none; }
+        .open-app {
+            display: inline-block;
+            margin-top: 24px;
+            background: var(--teal);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+        }
+        .open-app:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Masarify</h1>
+        <span style="color:var(--divider)">|</span>
+        <a href="index.html">← Open App</a>
+    </header>
+
+    <h2 style="font-size:22px;font-weight:700;margin-bottom:24px;color:var(--ink)">What's New</h2>
+
+    <!-- ═══════════════════════════════════════════════════
+         ADD NEW RELEASES AT THE TOP — copy the block below
+         ═══════════════════════════════════════════════════ -->
+
+    <div class="release">
+        <div class="release-header">
+            <span class="version">Version 1.0</span>
+            <span class="date">July 2026</span>
+            <span class="badge">Initial Release</span>
+        </div>
+
+        <div class="section">
+            <div class="section-title">New</div>
+            <ul>
+                <li>Track income, expenses, and transfers across multiple accounts</li>
+                <li>Multi-currency support with live exchange rates</li>
+                <li>Category management with custom icons and colors</li>
+                <li>Dashboard with spending overview and account balances</li>
+                <li>Works as an installable PWA — no app store needed</li>
+                <li>Full offline support powered by local-first SQLite storage</li>
+                <li>Dark mode and light mode with automatic system detection</li>
+                <li>Arabic and English language support</li>
+                <li>Backup and restore your data</li>
+                <li>Notification settings and reminders</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         TEMPLATE — copy and paste above the previous entry
+         ═══════════════════════════════════════════════════
+    <div class="release">
+        <div class="release-header">
+            <span class="version">Version X.X</span>
+            <span class="date">Month Year</span>
+        </div>
+        <div class="section">
+            <div class="section-title">New</div>
+            <ul>
+                <li>...</li>
+            </ul>
+        </div>
+        <div class="section">
+            <div class="section-title">Improved</div>
+            <ul>
+                <li>...</li>
+            </ul>
+        </div>
+        <div class="section">
+            <div class="section-title">Fixed</div>
+            <ul>
+                <li>...</li>
+            </ul>
+        </div>
+    </div>
+    -->
+
+    <div style="text-align:center;margin-top:32px;">
+        <a class="open-app" href="index.html">Open Masarify</a>
+    </div>
+
+    <footer>
+        <p>Have feedback? <a href="https://forms.gle/bJLiU5fpXou2VRAEA">Tell us what you think</a></p>
+        <p style="margin-top:8px;">© 2026 Masarify · <a href="index.html">masarify-app.github.io/PWA</a></p>
+    </footer>
+</div>
+</body>
+</html>
