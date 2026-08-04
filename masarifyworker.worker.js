@@ -38,12 +38,13 @@ async function handleMessage() {
         id: data.id,
         results: db.exec("ROLLBACK TRANSACTION;"),
       })
-    case "export":
-      const exportBytes = db.serialize();
+    case "export": {
+      const exportBytes = sqlite3.capi.sqlite3_js_db_export(db.pointer);
       return postMessage(
         { id: data.id, results: { bytes: exportBytes.buffer } },
         [exportBytes.buffer],
       );
+    }
     case "import_clean": {
       db.close();
       const opfsRoot = await navigator.storage.getDirectory();
