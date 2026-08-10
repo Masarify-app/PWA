@@ -25,10 +25,11 @@
         });
       })();
     </script>
-    <!-- Firebase Web SDK (compat) for FCM Web Push and Remote Config -->
+    <!-- Firebase Web SDK (compat) for FCM Web Push, Remote Config, and Analytics -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-remote-config-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics-compat.js"></script>
     <script>
       if (typeof firebase !== 'undefined' && !firebase.apps.length) {
         firebase.initializeApp({
