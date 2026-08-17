@@ -42,8 +42,50 @@
         });
       }
     </script>
+    <script>
+      (function() {
+        try {
+          var p = new URLSearchParams(window.location.search);
+          window.__masarifyUtm = {
+            utm_source: p.get('utm_source'),
+            utm_medium: p.get('utm_medium'),
+            utm_campaign: p.get('utm_campaign'),
+            utm_term: p.get('utm_term'),
+            utm_content: p.get('utm_content'),
+            ref: p.get('ref')
+          };
+        } catch(e) { window.__masarifyUtm = {}; }
+      })();
+    </script>
+    <script src="lottie_light.min.js"></script>
     <script type="application/javascript" src="composeApp.js"></script>
 </head>
 <body>
+<div id="splash">
+    <div id="lottie-container"></div>
+</div>
+<script>
+  (function () {
+    lottie.loadAnimation({
+      container: document.getElementById('lottie-container'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'animated_logo.json'
+    });
+
+    var splash = document.getElementById('splash');
+    var observer = new MutationObserver(function () {
+      var composeRoot = Array.from(document.body.children).find(function (el) {
+        return el.id !== 'splash';
+      });
+      if (!composeRoot) return;
+      observer.disconnect();
+      splash.style.opacity = '0';
+      setTimeout(function () { splash.parentNode && splash.parentNode.removeChild(splash); }, 400);
+    });
+    observer.observe(document.body, { childList: true });
+  })();
+</script>
 </body>
 </html>
