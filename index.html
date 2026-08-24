@@ -77,7 +77,8 @@
     var splash = document.getElementById('splash');
     var observer = new MutationObserver(function () {
       var composeRoot = Array.from(document.body.children).find(function (el) {
-        return el.id !== 'splash';
+        return (el.tagName === 'TEMPLATE' && el.hasAttribute('shadowrootmode')) ||
+               el.tagName === 'CANVAS';
       });
       if (!composeRoot) return;
       observer.disconnect();
