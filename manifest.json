@@ -5,9 +5,9 @@
   "start_url": "/PWA/",
   "scope": "/PWA/",
   "display": "standalone",
-  "orientation": "portrait",
-  "theme_color": "#6750A4",
-  "background_color": "#FFFBFE",
+  "orientation": "any",
+  "theme_color": "#055250",
+  "background_color": "#FDFDFB",
   "icons": [
     {
       "src": "favicon.svg",

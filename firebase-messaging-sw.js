@@ -1,28 +1,26 @@
-importScripts('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js');
-importScripts('https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging-compat.js');
-
-firebase.initializeApp({
-    apiKey: "AIzaSyBvQw26WcbM0mm-c5EQ7-TiW77ZoM24iAg",
-    authDomain: "masarify.firebaseapp.com",
-    projectId: "masarify",
-    storageBucket: "masarify.firebasestorage.app",
-    messagingSenderId: "937375111830",
-    appId: "1:937375111830:web:42e4fa31ca8ac80bf900b7"
+// A service worker that removes itself. The earlier web app (Kotlin/Wasm, until 2026-11) registered two workers at
+// this folder's scope (/PWA/): coi-serviceworker.js (cross-origin isolation headers on every response, and a cache of
+// the old app) and firebase-messaging-sw.js (web push). The app needs neither: its database needs no cross-origin
+// isolation, and web push comes back with Task 10e. A browser that still has one checks its script for an update on
+// a visit, finds this one (served at both addresses) and installs it, which:
+// 1. takes over from the old worker at once (skipWaiting), so the open pages are this worker's;
+// 2. unregisters, so no worker controls this scope once those pages are gone;
+// 3. deletes the caches the old worker filled;
+// 4. reloads the open pages, which the network then serves without the old headers.
+// It handles no fetch: nothing is cached or rewritten. Until Task 10e ships a real firebase-messaging-sw.js, both
+// addresses serve this same file (webApp SiteTest checks it). Guide section 4.15, checklist 76.
+self.addEventListener("install", () => {
+    self.skipWaiting();
 });
 
-const messaging = firebase.messaging();
-
-messaging.onBackgroundMessage(function(payload) {
-    if (payload.data && payload.data.type === 'sync') {
-        // Notify all active clients to trigger sync
-        self.clients.matchAll({ includeUncontrolled: true, type: 'window' }).then(function(clients) {
-            clients.forEach(function(client) {
-                client.postMessage({ type: 'sync' });
-            });
-        });
-    } else {
-        const title = payload.notification && payload.notification.title ? payload.notification.title : 'Masarify';
-        const body = payload.notification && payload.notification.body ? payload.notification.body : '';
-        self.registration.showNotification(title, { body: body });
-    }
+self.addEventListener("activate", (event) => {
+    event.waitUntil(
+        (async () => {
+            await self.registration.unregister();
+            const keys = await caches.keys();
+            await Promise.all(keys.map((key) => caches.delete(key)));
+            const windows = await self.clients.matchAll({ type: "window" });
+            await Promise.all(windows.map((client) => client.navigate(client.url).catch(() => undefined)));
+        })(),
+    );
 });
